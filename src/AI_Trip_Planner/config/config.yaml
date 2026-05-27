@@ -1,0 +1,7 @@
+llm:
+  google:
+    provider: "google"
+    model_name: "gemini-3.5-flash"
+  groq:
+    provider: "groq"
+    model_name: "llama-3.3-70b-versatile"

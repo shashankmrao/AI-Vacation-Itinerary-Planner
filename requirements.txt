@@ -11,7 +11,7 @@ requests
 langchain_google_community
 langchain_tavily
 langchain_groq
-langchain_openai
+langchain_google_genai
 langgraph
 langchain-google-community[places]
 
