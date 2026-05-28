@@ -1,15 +1,15 @@
-from utils.model_loader import ModelLoader
-from prompt_library.prompt import SYSTEM_PROMPT
+from src.AI_Trip_Planner.utils.model_loader import ModelLoader
+from src.AI_Trip_Planner.prompt_library.prompt import SYSTEM_PROMPT
 from langgraph.graph import StateGraph, MessagesState, END, START
 from langgraph.prebuilt import ToolNode, tools_condition
-from tools.weather_info_tool import WeatherInfoTool
-from tools.place_search_tool import PlaceSearchTool
-from tools.expense_calculator_tool import CalculatorTool
-from tools.currency_conversion_tool import CurrencyConverterTool
+from src.AI_Trip_Planner.tools.weather_info_tool import WeatherInfoTool
+from src.AI_Trip_Planner.tools.place_search_tool import PlaceSearchTool
+from src.AI_Trip_Planner.tools.expense_calculator_tool import CalculatorTool
+from src.AI_Trip_Planner.tools.currency_conversion_tool import CurrencyConverterTool
 
 class GraphBuilder():
-    def __init__(self, model_provider: str = "groq")
-        self.model_provider = ModelLoader(model_provider=model_provider)
+    def __init__(self, model_provider: str = "groq"):
+        self.model_loader = ModelLoader(model_provider=model_provider)
         self.llm = self.model_loader.load_llm()
 
         self.tools = []
@@ -30,13 +30,13 @@ class GraphBuilder():
 
         self.system_prompt = SYSTEM_PROMPT
 
-        def agent_function(self,state: MessagesState):
+    def agent_function(self,state: MessagesState):
             """Main agent function"""
             user_question = state["messages"]
             input_question = [self.system_prompt] + user_question
             response = self.llm_with_tools.invoke(input_question)
             return {"messages": [response]}
-        def build_graph(self):
+    def build_graph(self):
             graph_builder=StateGraph(MessagesState)
             graph_builder.add_node("agent", self.agent_function)
             graph_builder.add_node("tools", ToolNode(tools=self.tools))
@@ -47,7 +47,7 @@ class GraphBuilder():
             self.graph = graph_builder.compile()
             return self.graph
         
-        def __call__(self):
+    def __call__(self):
             return self.build_graph()
 
         

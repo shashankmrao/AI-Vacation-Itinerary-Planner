@@ -13,7 +13,8 @@ langchain_tavily
 langchain_groq
 langchain_google_genai
 langgraph
-langchain-google-community[places]
+fastapi
+setuptools
 
 
 -e .

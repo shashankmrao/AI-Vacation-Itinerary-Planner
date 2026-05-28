@@ -1,5 +1,5 @@
 import os
-from utils.currency_convertor import CurrencyConverter
+from src.AI_Trip_Planner.utils.currency_convertor import CurrencyConverter
 from typing import List
 from langchain.tools import tool
 from dotenv import load_dotenv

@@ -1,4 +1,4 @@
-from utils.expense_calculator import Calculator
+from src.AI_Trip_Planner.utils.expense_calculator import Calculator
 from typing import List
 from langchain.tools import tool
 

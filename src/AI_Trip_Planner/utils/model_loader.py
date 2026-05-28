@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from typing import Literal, Optional, Any
 from pydantic import BaseModel, Field
-from utils.config_loader import load_config
+from src.AI_Trip_Planner.utils.config_loader import load_config
 from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -21,8 +21,12 @@ class ModelLoader(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         self.config = ConfigLoader()
 
+    class Config:
+        arbitrary_types_allowed = True
+
     def load_llm(self):
         print(f"LLM loading from provider: {self.model_provider}")
+        load_dotenv()
         if self.model_provider == "google":
             google_api_key = os.getenv("GOOGLE_API_KEY")
             model_name = self.config["llm"]["google"]["model_name"]
